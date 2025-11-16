@@ -275,23 +275,87 @@
       </div>
     </div>
 
-    <!-- LORE POPUP -->
-    <div id="lore-popup" class="popup hidden">
-      <div class="panel panel-lore">
-        <button class="close-btn">✕</button>
-        <h3 class="panel-title">LORE OF SWEETARIA</h3>
-        <div class="lore-grid">
-          <div class="lore-card">
-            <canvas id="lore-canvas-1" width="128" height="128"></canvas>
-            <p class="lore-caption">Teen Troll — first boss, worst vibes.</p>
-          </div>
-          <div class="lore-card">
-            <canvas id="lore-canvas-2" width="128" height="128"></canvas>
-            <p class="lore-caption">Big Boss Head — the final argument.</p>
-          </div>
+<!-- =========================
+     LORE POPUP — REBUILT
+========================= -->
+<div id="lore-popup" class="popup hidden">
+  <div class="popup-inner lore-panel">
+
+    <button class="popup-close" onclick="closePopup('lore-popup')">✕</button>
+
+    <h2 class="popup-title">LORE OF SWEETARIA</h2>
+
+    <div class="lore-scroll">
+
+      <!-- =====================
+           BOSS CARD 1
+      ====================== -->
+      <div class="lore-card">
+        <div class="lore-portrait portrait-teen-troll"></div>
+
+        <div class="lore-text">
+          <h3>Teen Troll</h3>
+          <h4>First Boss — Worst Vibes</h4>
+
+          <p>
+            A chronically online menace who lives for low-effort insults and 
+            recycled memes. Teen Troll moves fast, reacts faster, and throws 
+            digital tantrums whenever confronted with facts. 
+          </p>
+
+          <p>
+            In battle, they weaponize flying emojis, explosive bad takes, 
+            and emotional immaturity. Their weakness is accountability — 
+            even a tiny bit makes them crumble.
+          </p>
         </div>
       </div>
-    </div>
+
+      <!-- =====================
+           BOSS CARD 2
+      ====================== -->
+      <div class="lore-card">
+        <div class="lore-portrait portrait-big-boss"></div>
+
+        <div class="lore-text">
+          <h3>Big Boss Head</h3>
+          <h4>The Final Argument</h4>
+
+          <p>
+            The ultimate wall of misplaced confidence. Big Boss Head speaks 
+            loudly, thinks slowly, and refuses to admit defeat even when cornered 
+            by logic. He’s the embodiment of every pointless debate that never 
+            should have happened.
+          </p>
+
+          <p>
+            His attacks include massive ego shockwaves, contradiction beams, and 
+            a special move called “I’m Actually Right,” which drains your will to 
+            live. His downfall? Kindness — a concept he has never encountered.
+          </p>
+        </div>
+      </div>
+
+      <!-- =====================
+           MORE BOSSES LATER
+      ====================== -->
+      <div class="lore-card coming-soon-card">
+        <div class="lore-portrait portrait-unknown"></div>
+
+        <div class="lore-text">
+          <h3>???</h3>
+          <h4>Mysterious Foe</h4>
+
+          <p>
+            A future adversary shrouded in secrecy. Their arrival will rewrite 
+            Sweetaria forever.
+          </p>
+        </div>
+      </div>
+
+    </div> <!-- lore-scroll -->
+  </div>
+</div>
 
     <!-- ACHIEVEMENTS POPUP -->
     <div id="achievements-popup" class="popup hidden">
