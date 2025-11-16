@@ -159,7 +159,6 @@
 
     // ============================
     // MAIN MENU BUTTONS
-    ============================
     on($("#play-btn"), "click", () => {
       if (SV.progress.lastCheckpoint > 1) openPopup("start-popup");
       else startRun(1);
