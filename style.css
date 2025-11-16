@@ -327,3 +327,23 @@ canvas {
     height: 165px;
   }
 }
+
+/* ===============================
+   SCROLL FIXES
+   =============================== */
+
+html, body {
+  height: 100%;
+  overflow: hidden !important; /* stops the blank outer scrolling */
+}
+
+#app {
+  min-height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
+}
+
+.popup-overlay {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
