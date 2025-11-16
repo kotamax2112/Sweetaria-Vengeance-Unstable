@@ -1,6 +1,6 @@
 /* =========================================================
-   SWEETARIA: VENGEANCE — UI OVERHAUL BUILD (MERGED)
-   Full CSS With Mobile Popup Scroll Fix
+   SWEETARIA: VENGEANCE — UI OVERHAUL + COMPENDIUM LORE
+   Final CSS Build (Merged + Mobile-Safe)
 ========================================================= */
 
 /* GLOBAL RESET */
@@ -19,35 +19,32 @@ html, body {
   overflow-x: hidden;
 }
 
-/* When popups open, lock background */
+/* Prevent body scroll when popup is open */
 body.popup-open {
   height: 100vh;
   overflow: hidden;
 }
 
-/* HIDDEN UTILITY */
 .hidden {
   display: none !important;
 }
 
 /* =========================================================
-   LAYOUT CONTAINER
+   MAIN GAME CONTAINER
 ========================================================= */
 
 #game-container {
   width: 800px;
   max-width: 98vw;
-  height: auto;
   margin: 0 auto;
-  position: relative;
   background: #000;
+  position: relative;
   overflow: visible;
-  padding-bottom: 40px; /* space for scroll */
+  padding-bottom: 40px;
   border: 4px solid #222;
   border-radius: 10px;
 }
 
-/* Canvas */
 canvas {
   width: 100%;
   height: auto;
@@ -59,7 +56,6 @@ canvas {
 ========================================================= */
 
 #title-screen {
-  position: relative;
   width: 100%;
   padding: 40px 0;
   text-align: center;
@@ -82,7 +78,6 @@ canvas {
 .tap-to-begin {
   font-size: 14px;
   color: #ffffffcc;
-  margin-top: 20px;
 }
 
 /* =========================================================
@@ -139,7 +134,7 @@ canvas {
 }
 
 /* =========================================================
-   POPUPS — GLOBAL (WITH MOBILE FIX)
+   POPUPS — GLOBAL (WITH MOBILE SCROLL FIX)
 ========================================================= */
 
 .popup {
@@ -156,7 +151,6 @@ canvas {
   z-index: 99999;
   color: #fff;
 
-  /* === MOBILE FIX === */
   max-height: 90vh;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -195,31 +189,6 @@ canvas {
 }
 
 /* =========================================================
-   LORE POPUP
-========================================================= */
-
-.lore-entry {
-  margin: 40px 0;
-  text-align: center;
-}
-
-.lore-entry img {
-  width: 180px;
-  height: auto;
-  image-rendering: pixelated;
-}
-
-.lore-name {
-  margin: 10px 0;
-  font-size: 20px;
-}
-
-.lore-desc {
-  font-size: 14px;
-  color: #ccd4ff;
-}
-
-/* =========================================================
    WARDROBE POPUP
 ========================================================= */
 
@@ -234,7 +203,6 @@ canvas {
   image-rendering: pixelated;
 }
 
-/* Color selectors */
 .color-row {
   display: flex;
   justify-content: center;
@@ -254,11 +222,10 @@ canvas {
   box-shadow: 0 0 10px #3f62ff;
 }
 
-/* Tabs */
 .wardrobe-tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin: 12px 0 20px;
 }
 
 .wardrobe-tab {
@@ -286,7 +253,6 @@ canvas {
 .achievement-title {
   font-size: 20px;
   text-shadow: 0 0 6px #6e9cff;
-  margin-bottom: 6px;
 }
 
 .achievement-desc {
@@ -386,47 +352,67 @@ canvas {
   }
 }
 
-/* ======================================
-   LORE POPUP — FULL REBUILD
-====================================== */
+/* =========================================================
+   LORE POPUP — COMPENDIUM MODE (B2)
+========================================================= */
+
+#lore-popup.lore-popup {
+  padding: 0;
+  border: none;
+  background: transparent;
+  max-height: 100vh;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make close button overlay panel */
+#lore-popup.lore-popup .popup-close {
+  z-index: 100000;
+}
+
+/* Main panel */
 .lore-panel {
   width: 90%;
   max-width: 580px;
-  max-height: 80vh;
-  overflow: hidden;
-  position: relative;
-  padding: 20px 16px 26px;
+  max-height: 86vh;
+  padding: 20px 16px 24px;
   background: #0f1421;
-  border: 2px solid #4d8cff;
+  border: 3px solid #4d8cff;
   border-radius: 20px;
   box-shadow: 0 0 30px rgba(77, 140, 255, 0.4);
+  position: relative;
 }
 
 .lore-panel .popup-title {
   text-align: center;
-  margin-bottom: 14px;
-  font-size: 1.5rem;
+  margin: 0 0 12px;
+  font-size: 1.4rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 8px #6e9cff;
 }
 
-/* Scrollable inside content */
+/* Scrollable inside */
 .lore-scroll {
+  max-height: calc(86vh - 70px);
   overflow-y: auto;
   padding-right: 10px;
-  max-height: calc(80vh - 100px);
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Boss card container */
+/* Boss cards */
 .lore-card {
   background: #0b0f18;
   border: 2px solid #4d8cff;
   border-radius: 16px;
   padding: 16px;
-  margin-bottom: 22px;
-  box-shadow: inset 0 0 12px rgba(77, 140, 255, 0.4);
+  margin-bottom: 20px;
+  box-shadow: inset 0 0 12px rgba(77, 140, 255, 0.35);
 }
 
-/* Portrait boxes */
+/* Portraits */
 .lore-portrait {
   width: 100%;
   height: 160px;
@@ -434,21 +420,17 @@ canvas {
   background: #000;
   border: 2px solid #4d8cff;
   image-rendering: pixelated;
-}
-
-/* Placeholder portraits */
-.portrait-teen-troll {
-  background-image: url('assets/lore-teen-troll.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.portrait-teen-troll {
+  background-image: url('assets/lore-teen-troll.png');
 }
 
 .portrait-big-boss {
   background-image: url('assets/lore-big-boss.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .portrait-unknown {
@@ -461,25 +443,51 @@ canvas {
   );
 }
 
-/* Text Area */
 .lore-text h3 {
-  font-size: 1.2rem;
-  margin-bottom: 2px;
+  font-size: 1.1rem;
+  margin: 0 0 4px;
 }
 
 .lore-text h4 {
+  font-size: 0.9rem;
   color: #6daaff;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 
 .lore-text p {
-  font-size: 0.9rem;
-  line-height: 1.35;
-  margin-bottom: 10px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0 0 10px;
 }
 
-/* "Coming Soon" styling */
-.coming-soon-card h3, 
+.coming-soon-card {
+  opacity: 0.85;
+}
+
+.coming-soon-card h3,
 .coming-soon-card h4 {
-  opacity: 0.65;
+  opacity: 0.75;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+  .lore-panel {
+    width: 94%;
+    max-width: 94%;
+    padding: 18px 12px 22px;
+    border-width: 2px;
+  }
+
+  .lore-scroll {
+    max-height: calc(86vh - 64px);
+  }
+
+  .lore-portrait {
+    height: 150px;
+  }
+
+  .lore-text p {
+    font-size: 0.8rem;
+  }
 }
