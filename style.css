@@ -385,3 +385,101 @@ canvas {
     padding-bottom: 80px;
   }
 }
+
+/* ======================================
+   LORE POPUP — FULL REBUILD
+====================================== */
+.lore-panel {
+  width: 90%;
+  max-width: 580px;
+  max-height: 80vh;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 16px 26px;
+  background: #0f1421;
+  border: 2px solid #4d8cff;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(77, 140, 255, 0.4);
+}
+
+.lore-panel .popup-title {
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+/* Scrollable inside content */
+.lore-scroll {
+  overflow-y: auto;
+  padding-right: 10px;
+  max-height: calc(80vh - 100px);
+}
+
+/* Boss card container */
+.lore-card {
+  background: #0b0f18;
+  border: 2px solid #4d8cff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 22px;
+  box-shadow: inset 0 0 12px rgba(77, 140, 255, 0.4);
+}
+
+/* Portrait boxes */
+.lore-portrait {
+  width: 100%;
+  height: 160px;
+  margin: 0 auto 12px;
+  background: #000;
+  border: 2px solid #4d8cff;
+  image-rendering: pixelated;
+}
+
+/* Placeholder portraits */
+.portrait-teen-troll {
+  background-image: url('assets/lore-teen-troll.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.portrait-big-boss {
+  background-image: url('assets/lore-big-boss.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.portrait-unknown {
+  background: repeating-linear-gradient(
+    45deg,
+    #1a2233,
+    #1a2233 10px,
+    #0f1421 10px,
+    #0f1421 20px
+  );
+}
+
+/* Text Area */
+.lore-text h3 {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.lore-text h4 {
+  color: #6daaff;
+  margin-bottom: 10px;
+}
+
+.lore-text p {
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+/* "Coming Soon" styling */
+.coming-soon-card h3, 
+.coming-soon-card h4 {
+  opacity: 0.65;
+}
