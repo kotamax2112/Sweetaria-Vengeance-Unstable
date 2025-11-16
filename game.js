@@ -3,6 +3,7 @@
    - Fixed: ALL syntax errors
    - Fixed: closePopup()
    - Fixed: clicking menus works again
+   - Fixed: title screen now responds to taps/clicks
    ========================================================= */
 (() => {
   'use strict';
@@ -123,12 +124,41 @@
   };
 
   const SV = {
-    settings:Store.get('sv_set',{music:true,sfx:true,playerName:'Hero',gender:'m',shirt:'#ff5a5a',pants:'#2d3549',skinTone:'#ffd5a3',hairStyle:'short',item:'none',skin:null}),
-    progress:Store.get('sv_prog',{ach:{},jumps:0,lastCheckpoint:0,beatBoss1:false,beatBoss2:false,endlessUnlocked:false,allTimeScore:0}),
-    running:false, paused:false, level:1, score:0, lastTs:0, groundY:360,
+    settings:Store.get('sv_set',{
+      music:true,
+      sfx:true,
+      playerName:'Hero',
+      gender:'m',
+      shirt:'#ff5a5a',
+      pants:'#2d3549',
+      skinTone:'#ffd5a3',
+      hairStyle:'short',
+      item:'none',
+      skin:null
+    }),
+    progress:Store.get('sv_prog',{
+      ach:{},
+      jumps:0,
+      lastCheckpoint:0,
+      beatBoss1:false,
+      beatBoss2:false,
+      endlessUnlocked:false,
+      allTimeScore:0
+    }),
+    running:false,
+    paused:false,
+    level:1,
+    score:0,
+    lastTs:0,
+    groundY:360,
     player:{x:120,y:296,w:42,h:64,vy:0,onGround:true,jumpsUsed:0},
-    hazards:[], powerups:[], particles:[],
-    shield:0, jetpack:false, tesla:0, jetpackTime:0,
+    hazards:[],
+    powerups:[],
+    particles:[],
+    shield:0,
+    jetpack:false,
+    tesla:0,
+    jetpackTime:0,
     boss1:{active:false,hp:1,y:200,anim:0,quote:'',quoteTimer:0,dodged:0},
     rpg:{active:false,hp:100,max:100},
     devClicks:0
@@ -140,13 +170,13 @@
     if(!cvs) return;
     SV.ctx = cvs.getContext('2d');
 
-    // Title
-    qs('#title-screen').onclick = () => {
+    // Title screen – make entire area tappable/clickable
+    $('#title-screen').addEventListener('pointerdown', () => {
       Sound.init();
       if(SV.settings.music) Sound.startMusic();
-      qs('#title-screen').classList.add('hidden');
-      qs('#home-screen').classList.remove('hidden');
-    };
+      $('#title-screen').classList.add('hidden');
+      $('#home-screen').classList.remove('hidden');
+    });
 
     // Menu bindings
     qs('#play-btn').onclick = () => startRun(SV.progress.lastCheckpoint>1?'popup':1);
@@ -169,8 +199,14 @@
       award('share_game');
     };
 
-    qs('#start-at-last').onclick = () => { closePopup('start-popup'); startRun(SV.progress.lastCheckpoint||1); };
-    qs('#start-beginning').onclick = () => { closePopup('start-popup'); startRun(1); };
+    qs('#start-at-last').onclick = () => {
+      closePopup('start-popup');
+      startRun(SV.progress.lastCheckpoint||1);
+    };
+    qs('#start-beginning').onclick = () => {
+      closePopup('start-popup');
+      startRun(1);
+    };
 
     // Toggles
     const updSet=()=>{
@@ -181,23 +217,46 @@
       Store.set('sv_set',SV.settings);
     };
 
-    const toggleMus=()=>{SV.settings.music=!SV.settings.music; SV.settings.music?Sound.startMusic():Sound.stopMusic(); updSet();};
-    const toggleSfx=()=>{SV.settings.sfx=!SV.settings.sfx; updSet();};
+    const toggleMus=()=>{
+      SV.settings.music=!SV.settings.music;
+      SV.settings.music?Sound.startMusic():Sound.stopMusic();
+      updSet();
+    };
+    const toggleSfx=()=>{
+      SV.settings.sfx=!SV.settings.sfx;
+      updSet();
+    };
 
     qs('#music-toggle').onclick = toggleMus;
     qs('#pause-music-btn').onclick = toggleMus;
     qs('#sfx-toggle').onclick = toggleSfx;
     qs('#pause-sfx-btn').onclick = toggleSfx;
 
-    qs('#reset-progress-btn').onclick = () => { if(confirm("Reset all data?")){ localStorage.clear(); location.reload(); } };
+    qs('#reset-progress-btn').onclick = () => {
+      if(confirm("Reset all data?")){
+        localStorage.clear();
+        location.reload();
+      }
+    };
 
     // Pause
-    qs('#pause-btn').onclick = () => { SV.paused=true; openPopup('pause-menu'); };
-    qs('#resume-btn').onclick = () => { closePopup('pause-menu'); SV.paused=false; SV.lastTs=performance.now(); loop(); };
+    qs('#pause-btn').onclick = () => {
+      SV.paused=true;
+      openPopup('pause-menu');
+    };
+    qs('#resume-btn').onclick = () => {
+      closePopup('pause-menu');
+      SV.paused=false;
+      SV.lastTs=performance.now();
+      loop();
+    };
     qs('#quit-btn').onclick = () => location.reload();
 
     // Death
-    qs('#death-restart-checkpoint').onclick = () => { closePopup('death-popup'); startRun(SV.progress.lastCheckpoint||1); };
+    qs('#death-restart-checkpoint').onclick = () => {
+      closePopup('death-popup');
+      startRun(SV.progress.lastCheckpoint||1);
+    };
     qs('#death-exit-main').onclick = () => location.reload();
 
     // Jump
@@ -222,7 +281,10 @@
       SV.devClicks++;
       setTimeout(()=>SV.devClicks=0,2000);
       if(SV.devClicks>=5){
-        if(prompt("Code?")==="2112"){ openPopup('dev-menu'); award('secret_dev'); }
+        if(prompt("Code?")==="2112"){
+          openPopup('dev-menu');
+          award('secret_dev');
+        }
         SV.devClicks=0;
       }
     };
@@ -239,24 +301,32 @@
       b.onclick=()=>{
         if(b.dataset.power==='shield') SV.shield=3;
         if(b.dataset.power==='tesla') SV.tesla=5000;
-        if(b.dataset.power==='jetpack'){ SV.jetpack=true; SV.jetpackTime=8000; }
+        if(b.dataset.power==='jetpack'){
+          SV.jetpack=true;
+          SV.jetpackTime=8000;
+        }
         closePopup('dev-menu');
       };
     });
 
     // Close buttons
-    qsa('.close-btn').forEach(b=> b.onclick = ()=> b.closest('.popup').classList.add('hidden'));
+    qsa('.close-btn').forEach(b=> {
+      b.onclick = ()=> b.closest('.popup').classList.add('hidden');
+    });
 
     updSet();
   }
 
-  // FIXED POPUP FUNCTIONS
+  // POPUPS
   function openPopup(id){ qs('#'+id).classList.remove('hidden'); }
   function closePopup(id){ qs('#'+id).classList.add('hidden'); }
 
   // --- START RUN ---
   function startRun(lv){
-    if(lv==='popup'){ openPopup('start-popup'); return;}
+    if(lv==='popup'){
+      openPopup('start-popup');
+      return;
+    }
 
     ['home-screen','start-popup','death-popup','rpg-overlay']
       .forEach(id=>qs('#'+id).classList.add('hidden'));
@@ -275,6 +345,7 @@
     SV.shield=0;
     SV.jetpack=false;
     SV.tesla=0;
+    SV.jetpackTime=0;
     SV.rpg.active=false;
 
     qs('#player-name-display').textContent = SV.settings.playerName || "Hero";
@@ -375,7 +446,10 @@
         Sound.play(600,'sine');
         if(pw.type==='shield') SV.shield=3;
         if(pw.type==='tesla') SV.tesla=5000;
-        if(pw.type==='jetpack'){ SV.jetpack=true; SV.jetpackTime=8000; }
+        if(pw.type==='jetpack'){
+          SV.jetpack=true;
+          SV.jetpackTime=8000;
+        }
       }
     });
   }
@@ -471,7 +545,10 @@
     qs('#player-preview').appendChild(cvs);
     const ctx=cvs.getContext('2d');
 
-    const render=()=>{ctx.clearRect(0,0,300,180); drawPlayerSprite(ctx,130,80);};
+    const render=()=>{
+      ctx.clearRect(0,0,300,180);
+      drawPlayerSprite(ctx,130,80);
+    };
 
     const nameInput=qs('#player-name-input');
     if(nameInput){
@@ -479,6 +556,7 @@
       nameInput.onchange=e=>{
         SV.settings.playerName=e.target.value||'Hero';
         Store.set('sv_set',SV.settings);
+        qs('#player-name-display').textContent = SV.settings.playerName || "Hero";
       };
     }
 
@@ -543,7 +621,7 @@
       SKINS.forEach(skin=>{
         const card=document.createElement('button');
         card.className='skin-card';
-        const unlocked = !!(SV.progress.ach && SV.progress.ach[skin.id] || SV.progress.ach && SV.progress.ach[skin.req]);
+        const unlocked = !!(SV.progress.ach && (SV.progress.ach[skin.id] || SV.progress.ach[skin.req]));
         if(!unlocked) card.classList.add('locked');
         card.classList.add(skin.rarity);
         if(SV.settings.skin===skin.id) card.classList.add('selected');
