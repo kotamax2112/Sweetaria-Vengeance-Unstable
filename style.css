@@ -1,6 +1,6 @@
 /* =========================================================
    SWEETARIA: VENGEANCE — UI OVERHAUL + COMPENDIUM LORE
-   Final CSS Build (Merged + Mobile-Safe)
+   Final CSS Build (Matched to index.html)
 ========================================================= */
 
 /* GLOBAL RESET */
@@ -19,7 +19,6 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Prevent body scroll when popup is open */
 body.popup-open {
   height: 100vh;
   overflow: hidden;
@@ -45,7 +44,8 @@ body.popup-open {
   border-radius: 10px;
 }
 
-canvas {
+/* Canvas */
+#game-canvas {
   width: 100%;
   height: auto;
   display: block;
@@ -84,36 +84,41 @@ canvas {
    MAIN MENU BUTTONS
 ========================================================= */
 
+#home-screen {
+  padding: 20px 0;
+  text-align: center;
+}
+
 .menu-button {
   width: 90%;
   max-width: 450px;
   margin: 12px auto;
   padding: 18px 0;
-  background: #0f1628;
-  border: 3px solid #2b4eff;
+  background: #0b0f18;
+  border: 3px solid #3f5fff;
   border-radius: 12px;
   text-align: center;
   font-size: 16px;
   cursor: pointer;
+  color: #e8ecff;
   transition: 0.2s;
-  box-shadow: 0 0 12px #2540d5;
+  box-shadow: 0 0 8px #3f5fff;
 }
 
 .menu-button:hover {
-  background: #1a2647;
-  box-shadow: 0 0 18px #3f62ff;
+  background: #111a33;
+  box-shadow: 0 0 14px #4d6eff;
 }
 
-.menu-button:active {
-  background: #0b1020;
-  transform: scale(0.97);
+.menu-button.small {
+  font-size: 12px;
+  padding: 10px 0;
 }
 
 /* SETTINGS ICON */
 #settings-icon {
-  position: absolute;
-  top: 12px;
-  right: 12px;
+  position: relative;
+  margin: 0 auto 12px;
   width: 40px;
   height: 40px;
   background: #0f1628;
@@ -134,11 +139,64 @@ canvas {
 }
 
 /* =========================================================
-   POPUPS — GLOBAL (WITH MOBILE SCROLL FIX)
+   GAME SCREEN
+========================================================= */
+
+#game-screen {
+  position: relative;
+}
+
+/* HUD */
+#hud {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  text-shadow: 2px 2px #000;
+}
+
+#hud > div {
+  margin-bottom: 2px;
+}
+
+/* Pause button */
+#pause-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  background: #2b4eff;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Jump button (mobile-friendly) */
+#jump-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 16px 22px;
+  background: #ff3860;
+  border-radius: 10px;
+  border: 3px solid #ff9ab0;
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 2px 2px #000;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(255, 56, 96, 0.7);
+}
+
+/* =========================================================
+   POPUPS — GLOBAL
 ========================================================= */
 
 .popup {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   width: 90%;
@@ -150,7 +208,6 @@ canvas {
   padding: 20px;
   z-index: 99999;
   color: #fff;
-
   max-height: 90vh;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -163,7 +220,11 @@ canvas {
   margin-top: 0;
   color: #cce1ff;
   text-shadow: 0 0 6px #6e9cff;
-  font-size: 22px;
+  font-size: 20px;
+}
+
+.popup p {
+  font-size: 14px;
 }
 
 /* Close button */
@@ -196,44 +257,27 @@ canvas {
   text-align: center;
 }
 
-#wardrobe-preview {
+#player-preview {
   margin: 20px auto;
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   image-rendering: pixelated;
-}
-
-.color-row {
-  display: flex;
-  justify-content: center;
-  margin: 8px 0;
-}
-
-.color-dot {
-  width: 36px;
-  height: 36px;
-  border: 3px solid #2b4eff;
-  border-radius: 50%;
-  margin: 0 6px;
-  cursor: pointer;
-}
-
-.color-dot.selected {
-  box-shadow: 0 0 10px #3f62ff;
 }
 
 .wardrobe-tabs {
   display: flex;
   justify-content: center;
-  margin: 12px 0 20px;
+  margin: 12px 0 18px;
 }
 
 .wardrobe-tab {
-  padding: 12px 20px;
+  padding: 10px 16px;
   border: 3px solid #2b4eff;
   border-radius: 12px;
   margin: 0 8px;
   cursor: pointer;
+  background: #0f1628;
+  font-size: 12px;
 }
 
 .wardrobe-tab.active {
@@ -242,118 +286,58 @@ canvas {
   box-shadow: 0 0 10px #3f62ff;
 }
 
-/* =========================================================
-   ACHIEVEMENTS POPUP
-========================================================= */
-
-.achievement {
-  margin: 14px 0;
+.wardrobe-section {
+  display: none;
+  text-align: left;
+  font-size: 12px;
 }
 
-.achievement-title {
-  font-size: 20px;
-  text-shadow: 0 0 6px #6e9cff;
+.wardrobe-section.active {
+  display: block;
 }
 
-.achievement-desc {
-  color: #c9d3ff;
-  font-size: 14px;
+.wardrobe-section label {
+  display: block;
+  margin: 10px 0 4px;
 }
 
-/* =========================================================
-   SHARE POPUP
-========================================================= */
-
-#share-link {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0 20px;
-  font-family: monospace;
-  font-size: 14px;
-  border-radius: 6px;
-  border: none;
+.color-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
 }
 
-.share-btn {
-  padding: 12px 20px;
-  background: #2b4eff;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.share-btn:hover {
-  background: #3f62ff;
-}
-
-/* =========================================================
-   GAME HUD
-========================================================= */
-
-#hud {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  font-size: 14px;
-  line-height: 18px;
-  text-shadow: 2px 2px #000;
-}
-
-#pause-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 28px;
-  height: 28px;
-  background: #2b4eff;
-  border-radius: 6px;
-  text-align: center;
-  line-height: 28px;
-  font-size: 18px;
+.color-row button {
   cursor: pointer;
 }
 
-/* =========================================================
-   MOBILE ADJUSTMENTS
-========================================================= */
+/* Swatches */
+.color-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #2b4eff;
+}
 
-@media (max-width: 700px) {
+.color-swatch.active {
+  box-shadow: 0 0 10px #3f62ff;
+}
 
-  .popup {
-    width: 94%;
-    max-width: 94%;
-    padding: 18px;
-    border-width: 2px;
-  }
+.item-swatch {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 2px solid #2b4eff;
+  background: #0f1628;
+  font-size: 10px;
+}
 
-  .menu-button {
-    font-size: 14px;
-    padding: 14px 0;
-  }
-
-  #title-screen h1 {
-    font-size: 22px;
-  }
-
-  #title-screen h2 {
-    font-size: 14px;
-  }
-
-  .popup-close {
-    width: 34px;
-    height: 34px;
-  }
-
-  #game-container {
-    padding-bottom: 80px;
-  }
+.item-swatch.active {
+  background: #2b4eff;
 }
 
 /* =========================================================
-   LORE POPUP — COMPENDIUM MODE (B2)
+   LORE POPUP — COMPENDIUM MODE
 ========================================================= */
 
 #lore-popup.lore-popup {
@@ -367,12 +351,10 @@ canvas {
   align-items: center;
 }
 
-/* Make close button overlay panel */
 #lore-popup.lore-popup .popup-close {
   z-index: 100000;
 }
 
-/* Main panel */
 .lore-panel {
   width: 90%;
   max-width: 580px;
@@ -395,7 +377,7 @@ canvas {
 
 /* Scrollable inside */
 .lore-scroll {
-  max-height: calc(86vh - 70px);
+  max-height: calc(86vh - 64px);
   overflow-y: auto;
   padding-right: 10px;
   overscroll-behavior: contain;
@@ -425,6 +407,7 @@ canvas {
   background-position: center;
 }
 
+/* Placeholder portrait styles */
 .portrait-teen-troll {
   background-image: url('assets/lore-teen-troll.png');
 }
@@ -469,18 +452,95 @@ canvas {
   opacity: 0.75;
 }
 
-/* Mobile */
+/* =========================================================
+   ACHIEVEMENTS POPUP
+========================================================= */
+
+#achievement-list {
+  font-size: 12px;
+}
+
+.achievement-tile {
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  border: 2px solid #2b4eff;
+  background: #0f1628;
+}
+
+.achievement-tile.unlocked {
+  background: #214021;
+  border-color: #37d67a;
+}
+
+/* =========================================================
+   SHARE POPUP
+========================================================= */
+
+#share-link {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px;
+  font-family: monospace;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+}
+
+.share-btn {
+  padding: 12px 20px;
+  background: #2b4eff;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.share-btn:hover {
+  background: #3f62ff;
+}
+
+/* =========================================================
+   MOBILE ADJUSTMENTS
+========================================================= */
+
 @media (max-width: 700px) {
+  .popup {
+    width: 94%;
+    max-width: 94%;
+    padding: 18px;
+    border-width: 2px;
+  }
+
+  #title-screen h1 {
+    font-size: 22px;
+  }
+
+  #title-screen h2 {
+    font-size: 14px;
+  }
+
+  .menu-button {
+    font-size: 14px;
+    padding: 14px 0;
+  }
+
+  #game-container {
+    padding-bottom: 80px;
+  }
+
+  #jump-btn {
+    padding: 14px 18px;
+    font-size: 13px;
+  }
 
   .lore-panel {
     width: 94%;
     max-width: 94%;
     padding: 18px 12px 22px;
     border-width: 2px;
-  }
-
-  .lore-scroll {
-    max-height: calc(86vh - 64px);
   }
 
   .lore-portrait {
