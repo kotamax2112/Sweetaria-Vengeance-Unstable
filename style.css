@@ -1,7 +1,6 @@
 /* =========================================================
-   SWEETARIA: VENGEANCE — STABLE 3.0 CLASSIC UI
-   - Baseline visual style for stable branch
-   - All IDs aligned with game.js
+   SWEETARIA: VENGEANCE — HYBRID UI (Overhaul visuals)
+   Stable layout for current build
    ========================================================= */
 
 /* GLOBAL RESET */
@@ -351,7 +350,7 @@ body {
 }
 
 /* =========================================================
-   BUTTONS (GENERAL)
+   BUTTONS
    ========================================================= */
 .btn {
   border-radius: 999px;
@@ -368,7 +367,6 @@ body {
   box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
 }
 
-/* Danger variant */
 .btn.danger {
   border-color: #fb7185;
   background: radial-gradient(circle at top, #7f1d1d 0%, #020617 70%);
@@ -378,7 +376,6 @@ body {
   box-shadow: 0 0 14px rgba(248, 113, 113, 0.7);
 }
 
-/* Small & tiny */
 .btn.small {
   padding: 6px 10px;
   font-size: 9px;
@@ -389,17 +386,15 @@ body {
   font-size: 8px;
 }
 
-/* Wide */
 .btn.wide {
   width: 100%;
 }
 
-/* Square */
 .btn-square {
   padding: 6px 8px;
 }
 
-/* Jump button (mobile) */
+/* Jump button */
 .jump-btn {
   position: absolute;
   bottom: 10px;
@@ -437,22 +432,10 @@ body {
   color: #e5e7eb;
 }
 
-/* Panel sizes */
-.panel-small {
-  width: 320px;
-}
-
-.panel-medium {
-  width: 380px;
-}
-
-.panel-lore {
-  width: 420px;
-}
-
-.panel-achievements {
-  width: 420px;
-}
+.panel-small { width: 320px; }
+.panel-medium { width: 380px; }
+.panel-lore { width: 420px; }
+.panel-achievements { width: 420px; }
 
 .panel-wardrobe {
   width: 520px;
@@ -461,16 +444,9 @@ body {
   gap: 12px;
 }
 
-/* RPG & DEV */
-.panel-rpg {
-  width: 480px;
-}
+.panel-rpg { width: 480px; }
+.panel-dev { width: 360px; }
 
-.panel-dev {
-  width: 360px;
-}
-
-/* Panel content */
 .panel-title {
   margin: 0 0 10px 0;
   font-size: 11px;
@@ -503,7 +479,6 @@ body {
   font-size: 9px;
 }
 
-/* Close button */
 .close-btn {
   position: absolute;
   top: 6px;
@@ -570,7 +545,6 @@ body {
   display: block;
 }
 
-/* Appearance layout */
 .appearance-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -584,15 +558,10 @@ body {
   gap: 4px;
 }
 
-.field-full {
-  grid-column: 1 / -1;
-}
+.field-full { grid-column: 1 / -1; }
 
-.field-gender {
-  align-self: flex-start;
-}
+.field-gender { align-self: flex-start; }
 
-/* Labels */
 .field label {
   font-size: 8px;
   color: #9ca3af;
@@ -639,7 +608,6 @@ body {
   border-color: #38bdf8;
 }
 
-/* Gender buttons */
 .gender-row {
   display: flex;
   gap: 4px;
@@ -799,7 +767,6 @@ body {
   background: linear-gradient(90deg, #22c55e, #f97316, #ef4444);
 }
 
-/* Actions */
 .rpg-actions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
